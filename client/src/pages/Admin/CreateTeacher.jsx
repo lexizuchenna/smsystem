@@ -153,7 +153,7 @@ function CreateTeacher({setIsLoading}) {
 
     if (formData.role === "form-teacher") {
       console.log(formTeacher);
-      // dispatch(CTAction(formTeacher));
+      dispatch(CTAction(formTeacher));
     }
   };
   return (

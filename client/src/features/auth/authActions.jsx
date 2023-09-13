@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const BASEURL = axios.create({ baseURL: "http://localhost:4000/api/" });
+const URL =
+  import.meta.env.VITE_MODE === "DEV"
+    ? import.meta.env.VITE_BASE_URL_TEST
+    : import.meta.env.VITE_BASE_URL_LIVE;
+
+const BASEURL = axios.create({ baseURL: `${URL}/` });
 
 export const loginUser = async (formData) => {
   try {
@@ -18,12 +23,12 @@ export const loginUser = async (formData) => {
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem('user')
-}
+  localStorage.removeItem("user");
+};
 
 const actions = {
   loginUser,
-  logoutUser
+  logoutUser,
 };
 
 export default actions;
