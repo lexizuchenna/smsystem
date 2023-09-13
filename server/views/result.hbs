@@ -1,0 +1,396 @@
+<div class="center-div">
+  <table
+    class="tb"
+    width="15"
+    cellspacing="0"
+    cellpadding="0"
+    border="0"
+    align="center"
+  >
+    <tbody>
+      <tr style="height: 20px" class="header">
+        <td rowspan="5" style="display: inline-block" class="logo" valign="top">
+          <img src="" width="100" />
+        </td>
+        <td
+          style="
+                width: 800px;
+                font-weight: bold;
+                font-size: 45px;
+                font-family: Poppins;
+                display: inline-block;
+              "
+          class="big-title-list"
+          valign="top"
+          align="center"
+        >
+          SCHOOL MANAGMENT SYSTEM
+        </td>
+      </tr>
+      <tr>
+        <td class="bottom-line" colspan="2">
+          <table width="880" cellspacing="0" cellpadding="5" border="0">
+            <tbody>
+              <tr>
+                <td class="none caps" width="" align="left">Name of Student</td>
+                <td colspan="3" class="bottom-line">{{result.name}}</td>
+
+                <td class="none right" height="19">Class Average</td>
+                <td class="bottom-line">{{getAverage result}}</td>
+              </tr>
+              <tr>
+                <td width="123" align="left">Username</td>
+                <td class="bottom-line">{{result.username}}</td>
+                <td class="none right" width="100">Class</td>
+                <td class="bottom-line">SS1 BLUE</td>
+                <td
+                  class="none right"
+                  height="22"
+                  style="width: 200px;"
+                >Resumption Date</td>
+                <td class="bottom-line">{{formatDate "6-12-2003"}}</td>
+              </tr>
+              <tr>
+                <td valign="bottom" align="left">Sex</td>
+                <td class="bottom-line" width="105" align="left">F</td>
+                <td class="none right" width="50">D.O.B</td>
+                <td class="bottom-line">{{formatDate user.dob}}</td>
+
+              </tr>
+              <tr>
+                <td align="left">Term</td>
+                <td class="bottom-line" valign="bottom">{{result.term}}
+                  Term</td>
+
+              </tr>
+              <tr>
+                <td align="left">Year</td>
+                <td>{{result.session}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table style="margin-top: 20px" class="top-line">
+            <tbody>
+              <tr class="ass top-line">
+                <td
+                  rowspan="1"
+                  class="bottom-right left"
+                  width="230"
+                  align="center"
+                >
+                  SUBJECT
+                </td>
+                <td class="bottom-right" align="center" width="117">
+                  CLASSWORK
+                </td>
+                <td class="bottom-right" align="center" width="117">
+                  ASSIGNMENT
+                </td>
+                <td class="bottom-right" align="center" width="117">
+                  MID-TERM TEST
+                </td>
+                <td class="bottom-right" align="center" width="117">
+                  PROJECT
+                </td>
+                <td class="bottom-right" align="center" width="117">
+                  EXAM
+                </td>
+                <td class="bottom-right" align="center" width="117">
+                  TOTAL
+                </td>
+                <td class="bottom-right" align="center" width="117">
+                  GRADE
+                </td>
+                <td class="bottom-right" align="center">REMARKS</td>
+              </tr>
+              {{#each result.subjects}}
+                <tr class="center-row">
+                  <td class="bottom-right left" align="center">
+                    {{this.title}}
+                  </td>
+                  <td class="bottom-right" align="center">{{this.class-work}}
+                  </td>
+                  <td class="bottom-right" align="center">{{this.assignment}}
+                  </td>
+                  <td class="bottom-right" align="center">{{this.mid-term-test}}
+                  </td>
+                  <td class="bottom-right" align="center">{{this.project}} </td>
+                  <td class="bottom-right" align="center">{{this.exam}} </td>
+                  <td class="bottom-right" align="center">{{getTotal this}}</td>
+                  <td class="bottom-right" align="center">{{getGrade this}}</td>
+                  <td class="bottom-right" align="center">GOOD</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table
+            style="margin-top: 20px"
+            width="250"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+          >
+            <tbody>
+              <tr>
+                <td
+                  rowspan="25"
+                  width="200"
+                  align="right"
+                  style="vertical-align: top"
+                >
+                  <!--skills table-->
+                  <table
+                    style="margin: 10px; border: 1px solid black"
+                    width="270"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    align="left"
+                  >
+                    <tbody>
+                      <tr style="color: #0099ff">
+                        <td
+                          style="
+                                font-size: 14px;
+                                color: black;
+                                border-bottom: 1px solid #333;
+                              "
+                        >
+                          <b>SOCIAL BEHAIVOUR</b>
+                        </td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td class="title-box">
+                          ATTENDANCE TO CLASS
+                        </td>
+                        <td class="title-box" align="center"></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td class="title-box">
+                          ATTENTIVENESS IN CLASS
+                        </td>
+                        <td class="title-box" align="center"></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td class="title-box">
+                          CARRYING OUT ASSIGNMENT
+                        </td>
+                        <td class="empty-box" align="center"></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td class="title-box">
+                          NEATNESS AND DECENCY
+                        </td>
+                        <td
+                          class="border"
+                          style="
+                                font-size: 15px;
+                                padding: 0.5rem;
+
+                                width: 20px;
+                              "
+                          align="center"
+                        ></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td class="title-box">
+                          RELATIONSHIP WITH STAFF/STUDENTS
+                        </td>
+                        <td class="empty-box" align="center"></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td class="title-box">
+                          DISCIPLINE AND INTEGRITY
+                        </td>
+                        <td class="empty-box" align="center"></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td class="title-box">
+                          PERSONALITY/ATTITUDINAL TRAITS
+                        </td>
+                        <td class="empty-box" align="center"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+
+                <td style="vertical-align: top; padding-top: 10px">
+                  <table
+                    style="border: 1px solid black"
+                    width="270"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    align="left"
+                  >
+                    <tbody>
+                      <tr style="color: #0099ff">
+                        <td
+                          style="font-size: 14px; color: black"
+                          class="border"
+                        >
+                          <b>MOTOR SKILLS</b>
+                        </td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td
+                          class="border"
+                          style="font-size: 15px; padding: 0.5rem"
+                        >
+                          CREATIVITY
+                        </td>
+                        <td
+                          class="border"
+                          style="
+                                width: 20px;
+                                font-size: 15px;
+                                padding: 0.5rem;
+                              "
+                          align="center"
+                        ></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td
+                          class="border"
+                          style="font-size: 15px; padding: 0.5rem"
+                        >
+                          FLUENCY/COMMUNICATION ABILITY
+                        </td>
+                        <td
+                          class="border"
+                          style="
+                                width: 20px;
+                                font-size: 15px;
+                                padding: 0.5rem;
+                              "
+                          align="center"
+                        ></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td
+                          class="border"
+                          style="font-size: 15px; padding: 0.5rem"
+                        >
+                          SPORTS
+                        </td>
+                        <td
+                          class="border"
+                          style="
+                                width: 20px;
+                                font-size: 15px;
+                                padding: 0.5rem;
+                              "
+                          align="center"
+                        ></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td
+                          class="border"
+                          style="font-size: 15px; padding: 0.5rem"
+                        >
+                          SENSE OF CO-PERATION
+                        </td>
+                        <td
+                          class="border"
+                          style="
+                                width: 20px;
+                                font-size: 15px;
+                                padding: 0.5rem;
+                              "
+                          align="center"
+                        ></td>
+                      </tr>
+
+                      <tr class="center-row">
+                        <td
+                          class="border"
+                          style="font-size: 15px; padding: 0.5rem"
+                        >
+                          LEADERSHIP AND ORGANIZATIONAL ABILITY
+                        </td>
+                        <td
+                          class="border"
+                          style="
+                                width: 20px;
+                                font-size: 15px;
+                                padding: 0.5rem;
+                              "
+                          align="center"
+                        ></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+
+                <td style="vertical-align: top">
+                  <table
+                    style="margin: 0 7px;"
+                    width="450"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                  >
+                    <tbody>
+                      <tr style="width: 500px" width="100">
+                        <td width="90" align="left">
+                          Teacher's Comment:&nbsp;
+                        </td>
+                        <td
+                          colspan="2"
+                          style="width: 100%"
+                          class="bottom-line"
+                          align="left"
+                        >
+                          Very Good result.Work harder in FURTHER MATHEMATICS
+                          and MATHEMATICS
+                        </td>
+                        <!--<td>&nbsp;</td>-->
+                      </tr>
+
+                      <tr>
+                        <td>&nbsp;&nbsp;</td>
+                      </tr>
+
+                      <tr style="width: 500px" width="100">
+                        <td width="90" align="left">
+                          Principal's Remark/signature: &nbsp;
+                        </td>
+                        <td style="margin-top: 20px" class="" align="left">
+                          &nbsp; Very Good result.
+                        </td>
+                        <td rowspan="5">
+                          <img src="" width="113" />
+                        </td>
+                        <!--<td>&nbsp;</td>-->
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
