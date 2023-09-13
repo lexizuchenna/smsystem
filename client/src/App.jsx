@@ -45,6 +45,7 @@ function App() {
           <Route path="/" element={<Auth />} />
           <Route
             path="/admin/*"
+            exact
             element={
               <div>
                 <Sidebar />
