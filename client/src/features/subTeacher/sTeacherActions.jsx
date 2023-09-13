@@ -5,7 +5,7 @@ const URL =
     ? import.meta.env.VITE_BASE_URL_TEST
     : import.meta.env.VITE_BASE_URL_LIVE;
 
-const BASEURL = axios.create({ baseURL: `${URL}/` });
+const BASEURL = axios.create({ baseURL: `${URL}/api/` });
 
 export const saveResult = async (formData, token) => {
   try {
@@ -14,14 +14,14 @@ export const saveResult = async (formData, token) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    
+
     const { data } = await BASEURL.post("save-result", formData, config);
 
     return data;
   } catch (error) {
     const { response } = error;
     const message = response.data || error.message;
-    console.log(message)
+    console.log(message);
     throw new Error(message);
   }
 };
