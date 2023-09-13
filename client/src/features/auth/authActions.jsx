@@ -16,8 +16,7 @@ export const loginUser = async (formData) => {
     }
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     throw new Error(message);
   }
 };

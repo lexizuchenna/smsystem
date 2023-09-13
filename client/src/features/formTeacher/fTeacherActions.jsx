@@ -19,8 +19,7 @@ export const createStudent = async (formData, token) => {
 
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     console.log(message);
     throw new Error(message);
   }
@@ -38,8 +37,7 @@ export const updateStudent = async (formData, token) => {
 
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     console.log(message);
     throw new Error(message);
   }
@@ -57,8 +55,7 @@ export const approveResult = async (formData, token) => {
 
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     console.log(message);
     throw new Error(message);
   }
@@ -76,8 +73,7 @@ export const rejectResult = async (formData, token) => {
 
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     console.log(message);
     throw new Error(message);
   }

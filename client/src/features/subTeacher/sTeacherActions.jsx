@@ -19,8 +19,7 @@ export const saveResult = async (formData, token) => {
 
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     console.log(message);
     throw new Error(message);
   }

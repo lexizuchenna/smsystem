@@ -8,14 +8,6 @@ const initialState = {
   studentMessage: ""
 };
 
-// export const getAccount = createAsyncThunk("data/getAccount", async (id) => {
-//   try {
-//     return await dataService.getAccount(id);
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
-
 export const studentSlice = createSlice({
   name: "student",
   initialState: initialState,
@@ -24,19 +16,6 @@ export const studentSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder;
-    //   .addCase(getAccount.pending, (state) => {
-    //     state.isDataLoading = true;
-    //   })
-    //   .addCase(getAccount.fulfilled, (state, action) => {
-    //     state.isDataLoading = false;
-    //     state.isSuccess = true;
-    //     state.account = action.payload;
-    //   })
-    //   .addCase(getAccount.rejected, (state, action) => {
-    //     state.isDataLoading = false;
-    //     state.isError = true;
-    //     state.message = action.payload;
-    //   })
   },
 });
 

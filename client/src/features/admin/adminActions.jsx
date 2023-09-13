@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const BASEURL = axios.create({ baseURL: "http://localhost:4000/api/" });
+const URL =
+  import.meta.env.VITE_MODE === "DEV"
+    ? import.meta.env.VITE_BASE_URL_TEST
+    : import.meta.env.VITE_BASE_URL_LIVE;
+
+const BASEURL = axios.create({ baseURL: `${URL}/api/` });
 
 export const createTeacher = async (formData, token) => {
   try {
@@ -14,8 +19,7 @@ export const createTeacher = async (formData, token) => {
     
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     throw new Error(message);
   }
 };
@@ -32,8 +36,7 @@ export const createSession = async (formData, token) => {
     
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     throw new Error(message);
   }
 };
@@ -50,8 +53,7 @@ export const updateSession = async (formData, token) => {
     
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     throw new Error(message);
   }
 };
@@ -67,8 +69,7 @@ export const deleteSession = async (formData, token) => {
     
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     throw new Error(message);
   }
 };
@@ -85,8 +86,7 @@ export const approveResult = async (formData, token) => {
 
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     console.log(message);
     throw new Error(message);
   }
@@ -104,8 +104,7 @@ export const rejectResult = async (formData, token) => {
 
     return data;
   } catch (error) {
-    const { response } = error;
-    const message = response.data || error.message;
+    const message = error?.response?.data || error.message;
     console.log(message);
     throw new Error(message);
   }
