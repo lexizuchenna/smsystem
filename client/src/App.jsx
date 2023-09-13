@@ -1,10 +1,9 @@
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { auth, fTeacher, sTeacher, student, admin } from "./features/selectors";
-import { routes } from "./constants";
 
 import UserHeader from "./components/UserHeader";
 import Sidebar from "./components/Sidebar";

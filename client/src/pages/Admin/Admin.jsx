@@ -37,6 +37,7 @@ function Admin({ setIsLoading }) {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route
         path="/create-teacher"
+        exact
         element={<CreateTeacher setIsLoading={setIsLoading} />}
       />
       <Route

@@ -46,8 +46,8 @@ const suffixes = [
 
 const subjects = [...seniors, ...juniors];
 
-function CreateTeacher({setIsLoading}) {
-  const compress = new Compress()
+function CreateTeacher({ setIsLoading }) {
+  const compress = new Compress();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -57,7 +57,7 @@ function CreateTeacher({setIsLoading}) {
     password: "",
     subject: "",
     grades: [],
-    image: ""
+    image: "",
   });
 
   const [grades, setGrades] = useState(allGrades);
@@ -111,11 +111,15 @@ function CreateTeacher({setIsLoading}) {
     };
 
     setIsLoading(true);
-    const data = await compress.compress([file], options);
-    setIsLoading(false);
-
-    const image = data[0].prefix + data[0].data;
-    setFormData({ ...formData, image });
+    try {
+      const data = await compress.compress([file], options);
+      setIsLoading(false);
+      const image = data[0].prefix + data[0].data;
+      setFormData({ ...formData, image });
+    } catch (error) {
+      setIsLoading(false);
+      enqueueSnackbar(error.message, { variant: "error" });
+    }
   };
 
   const handleInputChange = (e) => {
