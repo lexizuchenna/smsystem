@@ -80,7 +80,7 @@ const AdminNavbar = () => {
               </Media>
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" end>
-              {authData.role === "admin" && (
+              {authData?.role === "admin" && (
                 <>
                   <DropdownItem>
                     <i className="ni ni-settings-gear-65" />
