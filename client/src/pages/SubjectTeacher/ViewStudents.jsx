@@ -15,6 +15,7 @@ import {
   Card,
   Col,
   CardHeader,
+  Button,
 } from "reactstrap";
 
 import { auth } from "../../features/selectors";
@@ -41,6 +42,10 @@ function ViewStudents({ setIsLoading }) {
     navigate(`/sub-teacher/create-result/${username}`);
   };
 
+  const handlePrev = () => {
+    window.history.back();
+  };
+
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -61,6 +66,15 @@ function ViewStudents({ setIsLoading }) {
         <Col lg="12" md="12" sm="12">
           <Card className="bg-secondary shadow border-0">
             <CardHeader className="bg-transparent">
+              <Col className="text-left text-md" xs="6">
+                <Button
+                  color="dark"
+                  onClick={() => window.history.back()}
+                  size="md"
+                >
+                  Back
+                </Button>
+              </Col>
               <div className="text-muted text-center mt-2">
                 <h4>View All Student</h4>
               </div>
@@ -82,7 +96,12 @@ function ViewStudents({ setIsLoading }) {
                       <th scope="row">
                         <Media className="align-items-center">
                           <span className="avatar rounded-circle mr-3">
-                            <img alt="..." src={student?.image} width="48px" height="48px" />
+                            <img
+                              alt="..."
+                              src={student?.image}
+                              width="48px"
+                              height="48px"
+                            />
                           </span>
                           <Media>
                             <span className="mb-0 text-sm">{student.name}</span>
@@ -91,7 +110,7 @@ function ViewStudents({ setIsLoading }) {
                       </th>
                       <td>{student.username}</td>
                       <td>{student.grade}</td>
-                      
+
                       <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle

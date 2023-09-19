@@ -18,6 +18,15 @@ import {
 
 import InputAddon from "../../components/InputAddon";
 import AuthFooter from "../../components/Footer/AuthFooter";
+import InputBox from "../../components/Input";
+
+const options = [
+  { value: "default", text: "Select Login User" },
+  { value: "admin", text: "Admin" },
+  { value: "form-teacher", text: "Form Teacher" },
+  { value: "sub-teacher", text: "Subject Teacher" },
+  { value: "student", text: "Student" },
+];
 
 import { loginUser, resetAuth } from "../../features/auth/authSlice";
 import { auth } from "../../features/selectors";
@@ -39,6 +48,7 @@ function Auth() {
       document.body.classList.remove("bg-default");
     };
   }, []);
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -55,10 +65,31 @@ function Auth() {
   }, [isAuthSuccess, isAuthError]);
 
   const handleLogin = () => {
-    if (!username || !password) {
+    console.log(formData);
+    if (!formData.username || !formData.password) {
       return enqueueSnackbar("Fill all fields", { variant: "error" });
     }
-    dispatch(loginUser({ username, password }));
+    dispatch(loginUser(formData));
+  };
+
+  const handleLoginData = (e) => {
+    e.preventDefault();
+    const value = e.target.value;
+
+    if (value === "admin") {
+      return setFormData({ username: "admin", password: "Ab123456" });
+    }
+    if (value === "form-teacher") {
+      return setFormData({ username: "uchenna-js1", password: "Ab123456" });
+    }
+    if (value === "sub-teacher") {
+      return setFormData({ username: "alex-com", password: "Ab123456" });
+    }
+    if (value === "student") {
+      return setFormData({ username: "student155031", password: "Ab123456" });
+    }
+
+    return setFormData({ username: "", password: "" });
   };
 
   return (
@@ -103,9 +134,30 @@ function Auth() {
                 </CardHeader>
                 <CardBody className="px-lg-5 py-lg-5">
                   <div className="text-center text-muted mb-4">
-                    <small>Sign in with credentials</small>
+                    <small>
+                      Select user to login <br />
+                      Login form will be used in production
+                    </small>
                   </div>
                   <Form role="form">
+                    <InputBox
+                      type="select"
+                      options={options}
+                      name="role"
+                      onChange={handleLoginData}
+                      value={formData.username}
+                    />
+                    <div className="text-center">
+                      <Button
+                        className="my-4"
+                        color="primary"
+                        type="button"
+                        onClick={handleLogin}
+                      >
+                        Sign in
+                      </Button>
+                    </div>
+                    <hr />
                     <FormGroup className="mb-3">
                       <InputGroup className="input-group-alternative">
                         <InputAddon text="@" />
@@ -116,6 +168,7 @@ function Auth() {
                           autoComplete="username"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
+                          disabled
                         />
                       </InputGroup>
                     </FormGroup>
@@ -130,9 +183,11 @@ function Auth() {
                           autoComplete="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
+                          disabled
                         />
                       </InputGroup>
                     </FormGroup>
+
                     <div className="custom-control custom-control-alternative custcvom-checkbox">
                       <input
                         className="custom-control-input"
@@ -146,17 +201,6 @@ function Auth() {
                       >
                         <span className="text-muted">Remember me</span>
                       </label>
-                    </div>
-
-                    <div className="text-center">
-                      <Button
-                        className="my-4"
-                        color="primary"
-                        type="button"
-                        onClick={handleLogin}
-                      >
-                        Sign in
-                      </Button>
                     </div>
                   </Form>
                 </CardBody>

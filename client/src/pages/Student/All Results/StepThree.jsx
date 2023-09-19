@@ -45,10 +45,9 @@ function StepThree({ setStep, setResultData, resultData, setIsLoading }) {
         const { data } = await axios.get(
           `${BASE_URL}/result/verify?username=${username}&term=${term}&session=${session}`,
           config
-        );
+        )
 
         setIsLoading(false);
-        console.log(data)
         if (data === "Verified") setVerified(true);
       } catch (error) {
         setIsLoading(false);

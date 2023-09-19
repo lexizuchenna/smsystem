@@ -104,7 +104,7 @@ export const seniors = [
   { checked: false, text: "I.C.T", name: "ict" },
   { checked: false, text: "Literature", name: "Literature" },
   { checked: false, text: "C.R.S", name: "crs" },
-  { checked: false, text: "Tourism", name: "mourism" },
+  { checked: false, text: "Tourism", name: "tourism" },
   { checked: false, text: "Music", name: "music" },
   { checked: false, text: "Government", name: "government" },
   { checked: false, text: "Igbo", name: "Igbo" },
