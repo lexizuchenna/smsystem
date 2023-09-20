@@ -41,7 +41,7 @@ module.exports = {
       });
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error?.message);
     }
   },
 
@@ -54,10 +54,14 @@ module.exports = {
 
       const record = await Data.findOne().sort({ session: -1, term: -1 });
 
+      if(!record) {
+        return res.status(400).json("No session set by Admin")
+      }
+
       return res.status(200).json(record);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   getRecords: async (req, res) => {
@@ -68,6 +72,10 @@ module.exports = {
 
       const records = await Data.find().sort({ session: 1 });
 
+      if(!records) {
+        return res.status(400).json("No session available")
+      }
+
       const mappedRecords = records.map((record) => record.session);
 
       const setRecords = [...new Set(mappedRecords)];
@@ -75,7 +83,7 @@ module.exports = {
       return res.status(200).json(setRecords);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   getResult: async (req, res) => {
@@ -107,7 +115,7 @@ module.exports = {
       return res.status(200).json(newResult);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   approveResult: async (req, res) => {
@@ -129,7 +137,6 @@ module.exports = {
       }
 
       if (role === "form-teacher") {
-        console.log(result.f_approve);
         await Result.findOneAndUpdate({ username, session, term }, result);
 
         return res.status(200).json("Result Sent For Approval");
@@ -138,7 +145,7 @@ module.exports = {
       return res.status(400).json("Not Authorized");
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   rejectResult: async (req, res) => {
@@ -154,7 +161,7 @@ module.exports = {
       return res.status(200).json("Result Rejected");
     } catch (error) {
       console.log("error", error);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
 
@@ -171,7 +178,6 @@ module.exports = {
         const isGrade = await Users.findOne({ grade, suffix });
 
         if (isGrade) {
-          console.log("grade", isGrade);
           return res.status(400).json("Grade Already Assigned");
         }
       }
@@ -179,7 +185,6 @@ module.exports = {
       const isUser = await Users.findOne({ username });
 
       if (isUser) {
-        console.log("user", isUser);
         return res.status(400).json("Username Taken");
       }
 
@@ -192,7 +197,7 @@ module.exports = {
       return res.status(200).json(`${name} Created Successfully`);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   fetchTeachers: async (req, res) => {
@@ -211,12 +216,12 @@ module.exports = {
       return res.status(200).json({ subTeachers, formTeachers });
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   createRecord: async (req, res) => {
     try {
-      if (req.user.role !== "admin") {
+      if (req?.user?.role !== "admin") {
         return res.status(400).json("Not Authorized");
       }
 
@@ -226,14 +231,14 @@ module.exports = {
 
       if (record) return res.status(400).json("Session and Term exists");
 
-      await Data.create({...req.body, "open-student": false});
+      await Data.create({...req.body, "open-result": false});
 
       return res
         .status(200)
         .json(`${session}_${term} Term created Successfuly`);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   updateRecord: async (req, res) => {
@@ -249,7 +254,7 @@ module.exports = {
       return res.status(200).json(`Record updated successfuly`);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   deleteRecord: async (req, res) => {
@@ -265,7 +270,7 @@ module.exports = {
       return res.status(200).json(`Record deleted successfuly`);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   getAllResults: async (req, res) => {
@@ -295,11 +300,11 @@ module.exports = {
       const { password, name } = req.body;
 
       const generateUsername = async () => {
-        let user = `student${generateNum()}`;
+        let user = `student${generateNum(5)}`;
         let username = await Users.findOne({ username: user });
 
         while (username) {
-          user = `student${generateNum(6)}`;
+          user = `student${generateNum(5)}`;
           username = await Users.findOne({ username: user });
         }
 
@@ -323,7 +328,7 @@ module.exports = {
       return res.status(200).json(`${name} Created Successfully`);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   updateStudent: async (req, res) => {
@@ -348,7 +353,7 @@ module.exports = {
       return res.status(200).json(`${name} Updated Successfully`);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   fetchStudents: async (req, res) => {
@@ -437,34 +442,11 @@ module.exports = {
         subjects: { $in: [req.user.subject] },
       });
 
-      const { session, term } = await Data.findOne().sort({
-        session: -1,
-        term: -1,
-      });
-
-      const result = students.map(async (s) => {
-        const res = await Result.findOne({
-          session,
-          term,
-          username: s.username,
-        });
-        return res;
-      });
-
-      console.log(result);
-
-      // getRes()
-      // console.log();
-      // console.log({session, term, username: s.username});
-      // console.log(res)
-      // result.push(res);
-
-      // console.log(data)
 
       return res.status(200).json(students);
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
   saveResult: async (req, res) => {
@@ -520,7 +502,7 @@ module.exports = {
       }
     } catch (error) {
       console.log("error", error.message);
-      res.status(500).json(error.message);
+      return res.status(500).json(error.message);
     }
   },
 };
