@@ -29,7 +29,7 @@ function ViewStudents({ setIsLoading }) {
   const [students, setStudents] = useState([]);
   const { authData } = useSelector(auth);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const config = {
     headers: {
@@ -55,11 +55,11 @@ function ViewStudents({ setIsLoading }) {
       })
       .catch((error) => {
         setIsLoading(false);
-        const message = error.response.data || error.message
-        if(message === "Jwt Expired") {
-          dispatch(logoutUser())
+        const message = error?.response?.data || error?.message;
+        if (message === "Jwt Expired") {
+          dispatch(logoutUser());
           enqueueSnackbar(message, { variant: "error" });
-          return navigate("/")
+          return navigate("/");
         }
       });
   }, []);

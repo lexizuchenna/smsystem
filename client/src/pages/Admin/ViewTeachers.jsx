@@ -49,14 +49,14 @@ function ViewTeachers({ setIsLoading }) {
       .get(`${BASE_URL}/api/get-teachers`, config)
       .then((response) => {
         const { data } = response;
-        setFormTeachers(data.formTeachers);
-        setSubTeachers(data.subTeachers);
+        setFormTeachers(data?.formTeachers);
+        setSubTeachers(data?.subTeachers);
 
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
-        const message = error.response.data || error.message;
+        const message = error?.response?.data || error?.message;
         if (message === "Jwt Expired") {
           dispatch(logoutUser());
           enqueueSnackbar(message, { variant: "error" });
