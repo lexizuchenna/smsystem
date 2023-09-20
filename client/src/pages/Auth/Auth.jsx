@@ -80,13 +80,13 @@ function Auth() {
       return setFormData({ username: "admin", password: "Ab123456" });
     }
     if (value === "form-teacher") {
-      return setFormData({ username: "uchenna-js1", password: "Ab123456" });
+      return setFormData({ username: "form-teacher", password: "Ab123456" });
     }
     if (value === "sub-teacher") {
-      return setFormData({ username: "alex-com", password: "Ab123456" });
+      return setFormData({ username: "sub-teacher", password: "Ab123456" });
     }
     if (value === "student") {
-      return setFormData({ username: "student155031", password: "Ab123456" });
+      return setFormData({ username: "student", password: "Ab123456" });
     }
 
     return setFormData({ username: "", password: "" });
